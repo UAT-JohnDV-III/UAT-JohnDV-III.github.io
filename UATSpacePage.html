@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<!--John Velazco-->
+
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <script src="code.js"></script>
+    <script src="class.js"></script>
+    <script src="dataLoader.js"></script>
+    <script>
+        //Creating needed variables
+        var wins = 0;
+        var loss = 0;
+        var tie = 0;
+        var theTime = new Date();
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_iteration = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        //method to get data into the array
+        var data = getData();
+
+        //function to update the display
+        function updateDisplay()
+        {
+            theTime = new Date();
+            console.log("The time is: " + theTime.getHours() + ":" + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes()) + 
+            ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds()));
+
+            var timeRead = data[index].time_seconds;
+            if (timeRead >= 10)
+            {
+                document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds");
+                document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, "degrees");
+                document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longitude", data[index].longitude, "degrees");
+                document.getElementById("data").rows["gps_sensor_alt"].innerHTML = dataRow("GPS Sensor Altitude", data[index].gps_altitude, " ");
+                document.getElementById("data").rows["bmp_sensor_alt"].innerHTML = dataRow("BMP Sensor Altitude", data[index].bmpSensor_altitude, " ");
+                document.getElementById("data").rows["bmp_sensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[index].bmpSensor_pressure, " ");
+                document.getElementById("data").rows["bmp_sensor_temp"].innerHTML = dataRow("BMP Sensor Temperature", data[index].bmpSensor_temp, " ");
+                document.getElementById("data").rows["digital_sensor_temp"].innerHTML = dataRow("Digital Sensor Temperature", data[index].digSensor_temp, " ");
+                document.getElementById("data").rows["css_sensor_temp"].innerHTML = dataRow("CSS Sensor Temperature", data[index].cssSensor_temp, " ");
+                document.getElementById("data").rows["css_sensor_eco2"].innerHTML = dataRow("CSS Sensor eCO2", data[index].cssSensor_eCO2, " ");
+                document.getElementById("data").rows["css_sensor_tvoc"].innerHTML = dataRow("CSS Sensor TVOC", data[index].cssSensor_TVOC, " ");
+                document.getElementById("data").rows["uv"].innerHTML = dataRow("UV", data[index].uv, " ");
+                document.getElementById("data").rows["accelX"].innerHTML = dataRow("Acceleration X", data[index].accelX, " ");
+                document.getElementById("data").rows["accelY"].innerHTML = dataRow("Acceleration Y", data[index].accelY, " ");
+                document.getElementById("data").rows["accelZ"].innerHTML = dataRow("Acceleration Z", data[index].accelZ, " ");
+                document.getElementById("data").rows["magneticX"].innerHTML = dataRow("Magnetic X", data[index].magneticX, " ");
+                document.getElementById("data").rows["magneticY"].innerHTML = dataRow("Magnetic Y", data[index].magneticY, " ");
+                document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ, " ");
+                document.getElementById("data").rows["gyroX"].innerHTML = dataRow("Gyro X", data[index].gyroX, " ");
+                document.getElementById("data").rows["gyroY"].innerHTML = dataRow("Gyro Y", data[index].gyroY, " ");
+                document.getElementById("data").rows["gyroZ"].innerHTML = dataRow("Gyro Z", data[index].gyroZ, " ");
+                document.getElementById("timeClock").innerHTML = ("The time is: " + theTime.getHours() + ":" + (theTime.getMinutes() < 10 ? "0" + theTime.getMinutes() : theTime.getMinutes()) + 
+            ":" + (theTime.getSeconds() < 10 ? "0" + theTime.getSeconds() : theTime.getSeconds()));
+
+                if (index <= 500) index++;
+                else index = 0;
+            }
+        }
+    </script>
+
+    <title>
+        Prof. Prater's CSC102 Webpage
+    </title>
+</head>
+
+<body>
+    <table>
+        <td>
+            <img src="UATspaceLogo-1.png">
+        </td>
+        <td>
+            <h1>UAT Space Program</h1>
+        </td>
+    </table>
+    <table width="70%" border="2" id="data" class="dataTable">
+        <col width="35%">
+        <col width="35%">
+        <thead>
+            <th>Data Type</th>
+            <th>Reading</th>
+        </thead>
+        <tbody>
+            <tr id="seconds" class="groovy"></tr>
+            <tr id="latitude" class="groovy"></tr>
+            <tr id="longitude" class="groovy"></tr>
+            <tr id="gps_sensor_alt" class="groovy"></tr>
+            <tr id="bmp_sensor_alt" class="groovy"></tr>
+            <tr id="bmp_sensor_pressure" class="groovy"></tr>
+            <tr id="bmp_sensor_temp" class="groovy"></tr>
+            <tr id="digital_sensor_temp" class="groovy"></tr>
+            <tr id="css_sensor_temp" class="groovy"></tr>
+            <tr id="css_sensor_eco2" class="groovy"></tr>
+            <tr id="css_sensor_tvoc" class="groovy"></tr>
+            <tr id="uv" class="groovy"></tr>
+            <tr id="accelX" class="groovy"></tr>
+            <tr id="accelY" class="groovy"></tr>
+            <tr id="accelZ" class="groovy"></tr>
+            <tr id="magneticX" class="groovy"></tr>
+            <tr id="magneticY" class="groovy"></tr>
+            <tr id="magneticZ" class="groovy"></tr>
+            <tr id="gyroX" class="groovy"></tr>
+            <tr id="gyroY" class="groovy"></tr>
+            <tr id="gyroZ" class="groovy"></tr>
+        </tbody>
+    </table>
+    <br>
+    <p id="timeClock" style="font-family: verdana;">Time is displayed here when running.</p>
+    <button id="startButton" class="button" onclick="start();">
+        Start
+    </button>
+    <button id="stopButton" class="button" onclick="fStop();">
+        Stop
+    </button>
+    <script>
+        document.getElementById("stopButton").disabled = true;
+    </script>
+    <br>
+    <br>
+    <p id="countdownTimer" style="font-family: 'Courier New', Courier, monospace;">Starting countdown...</p>
+    <button onclick="playCraps();" class="button">Play Craps</button>
+    <p id="die1Res" style="font-family: sans-serif;">Waiting on die1...</p>
+    <p id="die2Res" style="font-family: sans-serif;">Waiting on die2...</p>
+    <p id="sumRes" style="font-family: sans-serif;">Waiting for sum...</p>
+    <p id="finalRes" style="font-family: sans-serif;">Waiting on final result...</p>
+    <p style="font-family: impact;">Wins are:
+    <div id="winsRes" style="font-weight: bold;">0</div>
+    </p>
+    <p style="font-family: impact;">Losses are:
+    <div id="lossRes" style="font-weight: bold;">0</div>
+    </p>
+    <p style="font-family: impact;">Ties are:
+    <div id="tieRes" style="font-weight: bold;">0</div>
+    </p>
+
+    <br><br>
+    <script>
+        var fallLaunch = new Mission("To boldy go...", 100, 31, "October", 2021, "Fiona", 3);
+        var springLaunch = new Mission("To go again...", 15, 12, "April", 2022, "Polaris", 5);
+    </script>
+    <button class="lgButton" onclick="launchFall();">Launch Fall Mission</button>
+    <button class="lgButton" onclick="displayFall();">Display Fall Mission</button>
+    <br>
+    <button class="lgButton" onclick="launchSpring();">Launch Spring Mission</button>
+    <button class="lgButton" onclick="displaySpring();">Display Spring Mission</button>
+
+    <br><br>
+    <button class="lgButton" onclick="playStation();">Play Space Station Sounds</button>
+    <br><br>
+    <button class="lgButton" onclick="goBoards();">Goto my Boards Page</button>
+    <button class="lgButton" onclick="goIndex();">Goto my landing Page</button>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(90deg, white, #2eacd4);
+}
+
+.groovy {
+    font-weight: bold;
+}
+
+#loginTitleText { 
+    color: green;
+    font-style: italic;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#loginDivText {
+    color: yellow;
+    font-weight: bolder;
+}
+
+#indexTitle {
+  color: rebeccapurple;
+}
+
+.blink_me {
+    animation: blinker 4s ease-in-out infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  
+.button {
+  width: 100px;
+  height: 30px;
+  background-color: white;
+  border-radius: 12px;
+  border-color: lightblue;
+}
+
+.lgButton {
+  width: 200px;
+  height: 30px;
+  background-color: white;
+  border-radius: 12px;
+  border-color: lightblue;
+}
+
+.dataTable {
+  background-color: rgb(142, 229, 255);
+  color: rgb(0, 0, 0);
+  border: 3px solid rgb(0, 102, 197);
+}
+
+#objTitle {
+  font-size: x-large;
+  color: rebeccapurple;
+}
