@@ -56,5 +56,32 @@ body {
 
 #objTitle {
   font-size: x-large;
-  color: rebeccapurple;
+  color: darkblue;
+}
+
+header{
+  text-align: center;
+  color: darkblue;
+  width: 100%;
+  padding: 5px;
+}
+
+nav{
+  line-height: 50px;
+  color: blue;
+  height: 1300px;
+  width: 200px;
+  padding: 5px;
+  float: left;
+  font-size: x-large;
+}
+
+#navColor{
+  color: blue;
+}
+
+footer{
+  text-align: center;
+  width: 100%;
+  height: 10%;
 }
