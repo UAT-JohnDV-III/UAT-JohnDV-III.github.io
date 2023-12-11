@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Portfolio</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body>
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="about.html">About Me</a></li>
+			<li><a href="projects.html">Projects</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+
+		<br><br><br><br><br><br><br>
+
+		<!--Order of these matter a lot, in the parent div element whichever is the top element is the left most element
+			So for our purpose we just swap them out-->
+
+		<div class="project_borders">
+			<div class="left_project_image">
+				<img src="project_1.png" style="width: 650px;height: 650px;">
+			</div>
+
+			<div class="left_project_text">
+				<p class="project_text_title">
+					Slender Fortress Modified
+				</p>
+
+				<p>
+					Slender Fortress is a custom gamemode made in 2013 that takes the concept of Slender: The Eight Pages and puts it in Team Fortress 2. Originally developed by Kit o' Rifty, picked up by Kenzzer in 2014, and picked up by me in 2018 as a different branch, hence the rebranding. The goal is simple, collect all collectibles within a specific time limit, escape to a specific point once all collectibles are collected, and avoid any enemies in a stealth like way.
+				</p>
+			</div>
+		</div>
+
+		<div class="project_borders">
+			<div class="right_project_text">
+				<p class="project_text_title">
+					The Horseless Headless Horsemann
+				</p>
+
+				<p>
+					A mod for A Hat in Time that takes the Horseless Headless Horsemann from Team Fortress 2 and makes him a boss. Submitted for the A Hat in Time 2022 Halloween Modding Jam. At one point the mod made it into a official Challenge Road in January of 2023. Compared to other boss mods of A Hat in Time at the time, this one featured new and unique attacks and or attack patterns.
+				</p>
+			</div>
+
+			<div class="right_project_image">
+				<img src="project_2.png" style="width: 650px;height: 650px;">
+			</div>
+		</div>
+
+		<div class="project_borders">
+			<div class="left_project_image">
+				<img src="project_3.png" style="width: 650px;height: 170px;margin-top: 35%;">
+			</div>
+
+			<div class="left_project_text">
+				<p class="project_text_title">
+					Slender Fortress Config Rewriter
+				</p>
+
+				<p>
+					Due to updating Slender Fortress and the gamemode's creation side focusing more on refined configs, either server owners and creators could manually rewrite all of their NPC configs or do it automatically, this tool automatically rewrites the configs to be up to date using either a simple console based window or an upcoming basic UI which is more refined.
+				</p>
+			</div>
+		</div>
+
+		<a href="contact.html">
+			<button type="button" class="buttoncontact">Contact</button>
+		</a>
+	</body>
+</html>
